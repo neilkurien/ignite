@@ -6,11 +6,17 @@ import { loadGames } from "./actions/gamesAction";
 import Home from "./pages/Home";
 import GlobalStyles from "./components/GlobalStyles";
 
+import { Routes, Route, Outlet } from "react-router-dom";
+
 function App() {
 	return (
 		<div className="App">
 			<GlobalStyles />
-			<Home />
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/games/:id" element={<Home />} />
+			</Routes>
+			<Outlet />
 		</div>
 	);
 }
