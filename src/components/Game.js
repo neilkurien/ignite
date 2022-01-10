@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { smallImage } from "../util";
 
 //Styling and Motion
 import styled from "styled-components";
@@ -10,19 +11,23 @@ import { useDispatch } from "react-redux";
 import { loadDetail } from "../actions/detailAction";
 
 const Game = ({ name, released, image, id }) => {
+	const stringPathId = id.toString();
 	//Load Detail
 	const dispatch = useDispatch();
 	const loadDetailHandler = () => {
 		document.body.style.overflow = "hidden";
 		dispatch(loadDetail(id));
-		console.log(id);
 	};
 	return (
-		<StyledGame onClick={loadDetailHandler}>
+		<StyledGame onClick={loadDetailHandler} layoutId={stringPathId}>
 			<Link to={`/games/${id}`}>
-				<h3>{name}</h3>
+				<motion.h3 layoutId={`title ${id}`}>{name}</motion.h3>
 				<p>{released}</p>
-				<img src={image} alt={name} />
+				<motion.img
+					layoutId={`image ${stringPathId}`}
+					src={smallImage(image, 640)}
+					alt={name}
+				/>
 			</Link>
 		</StyledGame>
 	);
